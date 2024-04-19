@@ -1,0 +1,97 @@
+@font-face {
+  font-family: IRANYekanFN;
+  src: url(Qs_Iranyekan.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.content {
+  height: 100vh;
+  margin : 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+}
+.loginPage{
+  hieght: 100vh;
+  margin: 0;
+}
+
+.addProduct_container {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 6px rgb(211, 129, 33);
+  width: 600px;
+  font-family: IRANYekanFN;
+}
+.addProduct_container h2 {
+  text-align: center;
+  font-size: 22px;
+  color: #504949;
+  margin-bottom: 30px;
+}
+.addProduct_container .row-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.addProduct_container .row-group label , input {
+  width: 250px;
+}
+.addProduct_container .form-control {
+  margin-bottom: 10px;
+}
+.addProduct_container .form-control label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+.addProduct_container .form-control input[type=text], .addProduct_container .form-control input[type=password] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
+.addProduct_container .form-control input[type=text]:focus, .addProduct_container .form-control input[type=password]:focus {
+  border: 2px solid rgb(70, 179, 206);
+}
+.addProduct_container button , section{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+.addProduct_container section{
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+.addProduct_container a{
+  text-decoration: none;
+  color: white;
+}
+.addProduct_container .add-button{
+    background-color: rgb(218, 130, 31);
+}
+.addProduct_container .main_button{
+    background-color: rgb(17, 34, 54);
+}
+.addProduct_container .add-button:hover {
+  background-color: rgb(173, 147, 19);
+}
+.addProduct_container .main_button:hover {
+  background-color: rgb(9, 76, 94);
+}

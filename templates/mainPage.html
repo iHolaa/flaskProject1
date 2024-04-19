@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <link rel="stylesheet" href="../static/mainPage.css">
+</head>
+<body>
+    <div id="user_container">
+        <div>Current User : {{ username }}</div>
+    </div>
+    <div class="container">
+        <a href="{{ url_for('product_list') }}" class="square">
+            <p>Product List</p>
+        </a>
+        <a href="{{ url_for('add_product') }}" class="square">
+            <p>Add Product</p>
+        </a>
+        <a href="{{ url_for('user_panel') }}" class="square">
+            <p>User Panel</p>
+        </a>
+        <a href="{{ url_for('login_page') }}" class="square logout">
+            <p>Log Out</p>
+        </a>
+    </div>
+</body>
+<script src="../static/login.js"></script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>SignUp Page</title>
+</head>
+<body>
+    <section class="content">
+      <div class="login-container">
+        <h2>Register</h2>
+        <form action="/signup" method="post">
+          <div class="row-group">
+            <div class="form-control">
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-control">
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" required>
+            </div>
+          </div>
+
+          <div class="form-control">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+          </div>
+
+          <div class="form-control">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+
+          <div class="row-group">
+            <div class="form-control">
+              <label for="phone_number">Phone Number</label>
+              <input type="text" id="phone_number" name="phone_number" required>
+            </div>
+            <div class="form-control">
+              <label for="Email">Email</label>
+              <input type="text" id="Email" name="Email" required>
+            </div>
+          </div>
+
+          <div class="form-control">
+            <label for="Store_address">Store_address</label>
+            <input type="text" id="Store_address" name="Store_address">
+          </div>
+
+          <button class = "signup_button" type="button" onclick="checkForm()">SignUp</button>
+          <a href="/loginPage">
+            <section class = "login_button">
+                Login
+            </section>
+          </a>
+        </form>
+      </div>
+    </section>
+</body>
+<script src="../static/signup.js"></script>
+</html>

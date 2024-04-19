@@ -1,0 +1,62 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/userPanel.css">
+        <title>User Panel</title>
+    </head>
+    <body>
+        <section class="content">
+          <div class="user_container">
+            <h2>User information</h2>
+            <form action="/user_panel" method="post">
+            {% for user in user_info %}
+              <div class="row-group">
+                <div class="form-control">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="{{ user['Username'] }}" readonly>
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password" value="{{ user['Password'] }}" required>
+                </div>
+              </div>
+              <div class="row-group">
+                <div class="form-control">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" value="{{ user['Name'] }}" readonly>
+                </div>
+                <div class="form-control">
+                  <label for="Email">Email</label>
+                  <input type="text" id="Email" name="Email" value="{{ user['Email'] }}" required>
+                </div>
+              </div>
+              <div class="row-group">
+                <div class="form-control">
+                  <label for="phone_number">Phone Number</label>
+                  <input type="text" id="phone_number" name="phone_number" value="{{ user['Phone_number'] }}" required>
+                </div>
+                <div class="form-control">
+                  <label for="store_address">Store Address</label>
+                  <input type="text" id="store_address" name="store_address" value="{{ user['Store_address'] }}">
+                </div>
+              </div>
+            {% endfor %}
+            </form>
+
+            <div class="button-group">
+                <button class = "purchased_list" type="button" onclick="">Purchased Products</button>
+                <button class="selling_list" type="button" onclick="window.location.href='/users_SaleList'">Products List for Sale</button>
+            </div>
+            <div class="button-group">
+              <button class = "update_button" type="button" onclick="checkUpdate()">Update Information</button>
+              <button class = "mainPage_button" type="button" onclick="goToMainPage()">Go to Main Page</button>
+            </div>
+
+          </div>
+        </section>
+    </body>
+    <script src="../static/userPanel.js"></script>
+    </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/addProduct.css">
+    <title>Add Product</title>
+</head>
+<body>
+    <section class="content">
+      <div class="addProduct_container">
+        <h2>Add Product for Sale </h2>
+        <form action="/add_product" method="post">
+          <div class="row-group">
+            <div class="form-control">
+              <label for="Name">Product Name</label>
+              <input type="text" id="Name" name="Name" required>
+            </div>
+            <div class="form-control">
+              <label for="Categorie">Product Categorie</label>
+              <input type="text" id="Categorie" name="Categorie" required>
+            </div>
+          </div>
+          <div class="row-group">
+            <div class="form-control">
+              <label for="Color">Product Color</label>
+              <input type="text" id="Color" name="Color" required>
+            </div>
+            <div class="form-control">
+              <label for="Weight">Product Weight</label>
+              <input type="text" id="Weight" name="Weight" required>
+          </div>
+          </div>
+          <div class="form-control">
+            <label for="Additional_description">Additional description</label>
+            <input type="text" id="Additional_description" name="Additional_description">
+          </div>
+          <div class="row-group">
+            <div class="form-control">
+              <label for="Price">Product Price</label>
+              <input type="text" id="Price" name="Price" required>
+            </div>
+            <div class="form-control">
+              <label for="Quantity">Quantity of Product</label>
+              <input type="text" id="Quantity" name="Quantity" required>
+            </div>
+          </div>
+
+          <button class = "add-button" type="button" onclick="checkProduct()">add Product</button>
+          <a href="/mainPage">
+            <section class = "main_button">
+                Go too Main
+            </section>
+          </a>
+        </form>
+      </div>
+    </section>
+</body>
+<script src="../static/productHandler.js"></script>
+</html>

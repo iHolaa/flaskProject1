@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALl Products</title>
+    <link rel="stylesheet" href="../static/productList.css">
+</head>
+<body>
+    <h1>List of Products</h1>
+
+    <table>
+            <tr>
+                <th>Name</th>
+                <th>Categorie</th>
+                <th>Price</th>
+                <th>points</th>
+                <th>Quantity</th>
+                <th>Operation</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product['Name'] }}</td>
+                    <td>{{ product['Categorie'] }}</td>
+                    <td>{{ product['Price'] }}</td>
+                    <td>{{ product['Average_points'] }}</td>
+                    <td>{{ product['Quantity'] }}</td>
+                    <td>
+                         <form action="/product_page" method="post">
+                            <input type="hidden" id="product_id" name="product_id" value="{{ product['Product_ID'] }}">
+                            <button type="submit" class="show-product-btn">show product</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+    </table>
+</body>
+<script src="../static/productHandler.js"></script>
+</html>

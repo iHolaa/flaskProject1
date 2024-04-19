@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add your meta tags and title here -->
+    <link rel="stylesheet" href="../static/productPage.css">
+</head>
+<body>
+    <h1>Product Information</h1>
+    <form class="product-details" action="/purchase_product" method="post">
+        <div class="product-detail-row" style="display: none">
+            <span class="detail-label">Product_ID:</span>
+            <span class="detail-value" id="product_id">{{ product['Product_ID'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Name:</span>
+            <span class="detail-value" id='p_name'>{{ product['Name'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Category:</span>
+            <span class="detail-value" id="p_categorie">{{ product['Categorie'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Color:</span>
+            <span class="detail-value" id="p_color">{{ product['Color'] }}</span>
+        </div><div class="product-detail-row">
+            <span class="detail-label">Weight:</span>
+            <span class="detail-value" id="p_weight">{{ product['Weight'] }} Kg</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Quantity Available :</span>
+            <span class="detail-value" id="p_quantity">{{ product['Quantity'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Price:</span>
+            <span class="detail-value" id="p_price">{{ product['Price'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Additional description:</span>
+            <span class="detail-value">{{ product['Additional_description'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Seller :</span>
+            <span class="detail-value" id="p_seller">{{ product['Seller']['s_name'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Average Points:</span>
+            <span class="detail-value" id="p_points">{{ product['Average_points'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Comments :</span>
+            <ul class="detail-value">
+                {% for comment in product['Comments'] %}
+                    <li>{{ comment['name'] }} - {{ comment['comment'] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="quantity_container">
+            <label for="Quantity_purchase">Quantity you want to Purchase</label>
+            <select id="Quantity_purchase" name="Quantity_purchase" required>
+                  {% for var in range(1, 21) %}
+                    <option value="{{ var }}">{{ var }}</option>
+                  {% endfor %}
+            </select>
+        </div>
+        <div class="button_container">
+            <button type="button" class="purchase_button" onclick="checkPurchase()">Purchase Product</button>
+        </div>
+    </form>
+
+</body>
+<script src="../static/productHandler.js"></script>
+</html>
