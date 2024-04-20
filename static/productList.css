@@ -1,3 +1,9 @@
+
+@font-face {
+  font-family: IRANYekanFN;
+  src: url(Qs_Iranyekan.ttf);
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -7,40 +13,46 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 100vh;
+    font-family: IRANYekanFN;
 }
 h1 {
-    color: #333;
+    color: #152b75;
+    margin: 50px 0;
 }
 
 table {
-    width: 80%;
+    width: 90%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
 th, td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0, 0, 0, 0.4);
     text-align: center;
+    background-color: #cdffd5;
     color: black;
 }
 
 th {
-    background-color: #28a745;
+    background-color: #b22d92;
     color: #fff;
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 300;
 }
 
 button {
-    background-color: #28a745;
+    border-radius: 10px;
+    background-color: #dc1010;
     color: #fff;
     cursor: pointer;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 20px;
+    font-family: IRANYekanFN;
+    transition: 0.5s all;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #8c1010;
 }

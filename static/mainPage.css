@@ -40,23 +40,23 @@ body{
 }
 
 .square {
-  background-color: #63a429;
+  background-color: #96be1c;
   color: white;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
-  transition: 0.5s all;
+  transition: 0.7s all;
   text-decoration: none;
   width: 50%;
 }
 .square:hover{
-  background-color: #50860c;
+  background-color: #b2e025;
 }
 .logout{
-  background-color: #da2828 !important;
+  background-color: #a92323 !important;
 }
 .logout:hover{
-  background-color: #a92323 !important;
+  background-color: #da2828 !important;
 }
 .square p {
   margin: 10px;
