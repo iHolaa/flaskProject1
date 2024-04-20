@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/rate_ProductPage.css">
+        <title>Rate Product</title>
+    </head>
+    <body>
+        <section class="content">
+          <div class="rate_container">
+            <h2>User information</h2>
+            <form action="/rate_ProductPage" method="post">
+                <input type="hidden" id="product_id" name="product_id" value="{{ product['Product_ID'] }}">
+                <div class="form-control">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" id="product_name" name="product_name" value="{{ product['Name'] }}" readonly>
+                </div>
+                <div class="form-control">
+                    <label for="Comment">Your Comment</label>
+                    <input type="text" id="Comment" name="Comment" required>
+                </div>
+                <div class="form-control">
+                    <label for="Rate">Rate Product</label>
+                    <select id="Rate" name="Rate" required>
+                        {% for var in range(1, 6) %}
+                            <option value="{{ var }}">{{ var }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button class="review_button" type="submit">Confirm</button>
+                    <button class="mainPage_button" type="button" onclick="goBack()">Go Back !</button>
+                </div>
+            </form>
+          </div>
+        </section>
+    </body>
+<script src="../static/rate_ProductPage.js"></script>
+</html>

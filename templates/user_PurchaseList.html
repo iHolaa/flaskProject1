@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchased items</title>
+    <link rel="stylesheet" href="../static/user_PurchaseList.css">
+</head>
+<body>
+    <h1>List of {{ user }} Orders / (Purchase History)</h1>
+
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Categorie</th>
+            <th>Product Color</th>
+            <th>Seller</th>
+            <th>Quantity Purchased</th>
+            <th>Total Price</th>
+            <th>Purchase Date</th>
+            <th>Rate Product</th>
+        </tr>
+        {% for item in purchase_list %}
+            <tr>
+                <td>{{ item['product_name']}}</td>
+                <td>{{ item['product_categorie']}}</td>
+                <td>{{ item['product_color']}}</td>
+                <td>{{ item['seller_name']}}</td>
+                <td>{{ item['quantity_ordered']}}</td>
+                <td>{{ item['total_price']}}</td>
+                <td>{{ item['order_time']}}</td>
+                <td>
+                    <form action="/rate_ProductPage" method="post">
+                        <input type="hidden" name="product_id" value="{{ item['Product_ID'] }}">
+                        <button type="submit" class="rate_product">Rate</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

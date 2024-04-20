@@ -321,7 +321,57 @@ def users_SaleList():
     return render_template("users_saleList.html", sales_list=user_products_for_sale , user = session['username'])
 
 
-from flask import jsonify
+@app.route('/user_PurchaseList', methods=['GET'])
+def user_PurchaseList():
+    username = session['username']
+    purchase_list = list(collection_Orders.aggregate([
+          {
+             "$skip": 0
+          },
+          {
+             "$limit": 10
+          },
+          {
+             "$match": {"User_ID": username}
+          },
+          {
+            "$lookup": {
+              "from": "Products_forSale",
+              "localField": "Product_ID",
+              "foreignField": "Product_ID",
+              "as": "product"
+            }
+          },
+          {
+            "$unwind": "$product"
+          },
+          {
+            "$lookup": {
+              "from": "Users",
+              "localField": "User_ID",
+              "foreignField": "Username",
+              "as": "user"
+            }
+          },
+          {
+            "$unwind": "$user"
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "Product_ID": "$Product_ID",
+              "order_time": "$Purchase_date",
+              "product_name": "$product.Name",
+              "product_categorie": "$product.Categorie",
+              "product_color": "$product.Color",
+              "seller_name": "$product.Seller.s_name",
+              "quantity_ordered": "$Quantity_Purchased",
+              "total_price": "$Total_price"
+            }
+          }
+    ]))
+    return render_template("user_PurchaseList.html", purchase_list = purchase_list , user = username)
+
 
 @app.route('/delete_product', methods=['POST'])
 def delete_product():
@@ -338,6 +388,23 @@ def delete_product():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)})
+
+
+@app.route('/rate_ProductPage', methods=['GET', 'POST'])
+def rate_ProductPage():
+    if request.method == 'POST':
+        product_id = int(request.form.get('product_id'))
+        session['product_id'] = product_id
+        return redirect(url_for('rate_ProductPage'))
+    else:
+        product_id = session.get('product_id')
+        if product_id:
+            product_info = collection_Products.find_one({"Product_ID": product_id})
+            #jaye aggregate
+            return render_template('rate_ProductPage.html', product=product_info)
+        else:
+            print("Missing Id !!")
+
 
 if __name__ == '__main__':
     app.run()
