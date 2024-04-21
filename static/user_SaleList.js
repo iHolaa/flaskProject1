@@ -9,7 +9,7 @@ function deleteProduct(productId) {
     .then(response => {
         if (response.ok) {
             alert("Product deleted successfully.");
-            location.reload(); // Reload the page after deletion
+            location.reload(); // Reload the page after delete
         } else {
             alert("Failed to delete product.");
         }

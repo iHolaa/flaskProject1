@@ -10,7 +10,7 @@ function checkProduct() {
   const Additional_description = document.getElementById('Additional_description').value;
   const Price = document.getElementById('Price').value;
 
-  // Data validation (you can add more validations as needed)
+
   if (!Name || !Categorie || !Color || !Weight || !Price || !Quantity) {
     alert('Please fill in all required fields.');
     return;
@@ -34,13 +34,13 @@ function checkProduct() {
     alert('Price and Quantity must be a number.');
     return;
   }
-  if (Quantity <= 20 && Quantity > 0) {
+  if (Quantity > 20 && Quantity <= 0) {
     alert('You can sell maximum of 20 products (Quantity) ! ');
     return;
   }
 
   alert('Product created successfully!');
-  addProductForm.submit(); // Submit the form
+  addProductForm.submit();
 };
 
 function checkPurchase() {
@@ -51,7 +51,6 @@ function checkPurchase() {
     const p_weight = document.getElementById('p_weight').innerText;
     const p_price = document.getElementById('p_price').innerText;
     const p_seller = document.getElementById('p_seller').innerText;
-    const p_points = document.getElementById('p_points').innerText;
     const p_quantity = document.getElementById('p_quantity').innerText;
     const Quantity_purchase = document.getElementById('Quantity_purchase').value;
 
@@ -69,7 +68,6 @@ function checkPurchase() {
           p_quantity: p_quantity,
           p_price: p_price,
           p_seller: p_seller,
-          p_points: p_points,
           Quantity_purchase: Quantity_purchase
         })
     })
@@ -82,7 +80,7 @@ function checkPurchase() {
     .then(data => {
         if (data.message === 'Successful') {
             alert('You have successfully Purchased!');
-            window.location.href = '/mainPage'; // Redirect to mainPage.html
+            window.location.href = '/mainPage';
         } else {
             alert(data.error);
         }

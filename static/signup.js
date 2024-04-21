@@ -33,7 +33,6 @@ function checkForm() {
   const email = document.getElementById('Email').value;
   const storeAddress = document.getElementById('Store_address').value;
 
-  // Data validation (you can add more validations as needed)
   if (!firstName || !lastName || !username || !password || !phoneNumber || !email) {
     alert('Please fill in all required fields.');
     return;
@@ -51,14 +50,13 @@ function checkForm() {
     return;
   }
 
-  // Regular expression for email validation
+  //email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     alert('Please enter a valid email address.')
     return;
   }
 
-  // Regular expression for phone number validation (example)
   const phoneRegex = /^\d{11}$/; // 11-digit phone number
   if (!phoneRegex.test(phoneNumber)) {
     alert('Please enter a valid 10-digit phone number.');
@@ -70,9 +68,8 @@ function checkForm() {
       if (!available) {
         alert('Username is already taken. Please choose a different username.');
       } else {
-        // Username is available, proceed with user registration
         alert('Account created successfully!');
-        signupForm.submit(); // Submit the form
+        signupForm.submit();
       }
     })
     .catch(error => {

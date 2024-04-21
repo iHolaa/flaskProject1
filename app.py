@@ -390,20 +390,71 @@ def delete_product():
         return jsonify({"success": False, "message": str(e)})
 
 
+
+@app.route('/show_RatePage', methods=['POST'])
+def show_RatePage():
+    if request.method == 'POST':
+        product_id = int(request.form.get('product_id'))
+        session['product_id'] = product_id
+        print("this is product Id")
+        print(product_id)
+        product_info = collection_Products.find_one({"Product_ID": product_id})
+        #jaye aggregate
+        return render_template('rate_ProductPage.html', product=product_info)
+
+
 @app.route('/rate_ProductPage', methods=['GET', 'POST'])
 def rate_ProductPage():
     if request.method == 'POST':
         product_id = int(request.form.get('product_id'))
-        session['product_id'] = product_id
+        product_name = str(request.form.get('product_name'))
+        comment = str(request.form.get('Comment'))
+        rate = int(request.form.get('Rate'))
+        username = session['username']
+
+        user_info = list(collection_Users.aggregate([
+            {"$match": {"Username": username}},
+            {"$project": {"_id": 0, "Name": 1}}
+        ]))
+        name = user_info[0]['Name']
+
+        # Check if user has already commented and rated for this product or not
+        product_info = list(collection_Products.aggregate([
+            {"$match": {"Product_ID": product_id}},
+            {"$unwind": "$Points_and_Comments"},
+            {"$match": {"Points_and_Comments.username": username}},
+            {"$limit": 1},
+            {"$project": {"_id": 1}}
+        ]))
+        if product_info:
+            return jsonify({'error': 'User already commented and rated for this product'})
+        else :
+            collection_Products.update_one(
+                {"Product_ID": product_id},
+                {
+                    "$push": {"Points_and_Comments": {
+                                'username': username,
+                                'name': name,
+                                'comment': comment,
+                                'rate': rate
+                                }
+                             }
+                })
+            collection_Reviews.insert_one(
+                {
+                    'Username': username,
+                    'Name': name,
+                    'Product_ID': product_id,
+                    'Product_name': product_name,
+                    'Review_text': comment,
+                    'rate': rate,
+                    'Review_date': datetime.today()
+                }
+            )
+            return jsonify({'message': 'Review submitted Successfully'})
+
         return redirect(url_for('rate_ProductPage'))
-    else:
-        product_id = session.get('product_id')
-        if product_id:
-            product_info = collection_Products.find_one({"Product_ID": product_id})
-            #jaye aggregate
-            return render_template('rate_ProductPage.html', product=product_info)
-        else:
-            print("Missing Id !!")
+
 
 
 if __name__ == '__main__':

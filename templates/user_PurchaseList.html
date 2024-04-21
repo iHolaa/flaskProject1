@@ -31,7 +31,7 @@
                 <td>{{ item['total_price']}}</td>
                 <td>{{ item['order_time']}}</td>
                 <td>
-                    <form action="/rate_ProductPage" method="post">
+                    <form action="/show_RatePage" method="post">
                         <input type="hidden" name="product_id" value="{{ item['Product_ID'] }}">
                         <button type="submit" class="rate_product">Rate</button>
                     </form>
