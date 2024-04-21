@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Add your meta tags and title here -->
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
     <link rel="stylesheet" href="../static/styles/productPage.css">
 </head>
 <body>
@@ -41,6 +42,10 @@
         <div class="product-detail-row">
             <span class="detail-label">Seller :</span>
             <span class="detail-value" id="p_seller">{{ product['Seller']['s_name'] }}</span>
+        </div>
+        <div class="product-detail-row">
+            <span class="detail-label">Seller Store Address :</span>
+            <span class="detail-value" id="Store_address">{{ product['Store_address'] }}</span>
         </div>
         <div class="product-detail-row">
             <span class="detail-label">Rates & Comments :</span>

@@ -1,0 +1,116 @@
+@font-face {
+  font-family: IRANYekanFN;
+  src: url(../Qs_Iranyekan.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.content {
+  height: 100vh;
+  margin : 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+}
+.loginPage{
+  hieght: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 6px rgb(88, 139, 206);
+  width: 600px;
+  font-family: IRANYekanFN;
+}
+.login-container h2 {
+  text-align: center;
+  font-size: 22px;
+  color: #504949;
+  margin-bottom: 10px;
+}
+.login-container .row-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.login-container .row-group label , input {
+  width: 250px;
+}
+.login-container .form-control {
+  margin-bottom: 10px;
+}
+.login-container .form-control label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+.login-container .form-control input[type=text], .login-container .form-control input[type=password] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
+.login-container .form-control input[type=text]:focus, .login-container .form-control input[type=password]:focus {
+  border: 2px solid rgb(70, 179, 206);
+}
+.login-container button , section{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+.login-container section{
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+.login-container a{
+  text-decoration: none;
+  color: white;
+}
+.login-container .signup_button{
+    background-color: #169a16;
+}
+.login-container .login_button{
+    background-color: rgb(9, 76, 94);
+}
+.login-container .signup_button:hover {
+  background-color: #24bd24;
+}
+.login-container .login_button:hover {
+  background-color: rgb(17, 34, 54);
+}
+
+@media only screen and (max-width: 600px) {
+  .login-container {
+    padding: 10px 20px;
+  }
+  .login-container h2 {
+    font-size: 16px;
+  }
+  .login-container .form-control {
+    margin-bottom: 5px;
+  }
+  .login-container .form-control input[type=text], .login-container .form-control input[type=password] {
+    font-size: 14px;
+  }
+  .login-container button {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+}/*# sour

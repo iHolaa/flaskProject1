@@ -14,18 +14,20 @@
             <tr>
                 <th>Name</th>
                 <th>Categorie</th>
-{#                <th>points</th>#}
+                <th>Average Rate</th>
                 <th>Quantity</th>
                 <th>Price for each</th>
+                <th>Store Address</th>
                 <th>Operation</th>
             </tr>
             {% for product in products %}
                 <tr>
                     <td>{{ product['Name'] }}</td>
                     <td>{{ product['Categorie'] }}</td>
-{#                    <td>{{ product['Average_points'] }}</td>#}
+                    <td>{{ product['averageRate'] }}</td>
                     <td>{{ product['Quantity'] }}</td>
                     <td>{{ product['Price'] }}</td>
+                    <td>{{ product['Store_address'] }}</td>
                     <td>
                          <form action="/product_page" method="post">
                             <input type="hidden" id="product_id" name="product_id" value="{{ product['Product_ID'] }}">

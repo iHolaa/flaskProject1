@@ -35,6 +35,7 @@ def add_user():
         Store_address = request.form.get('Store_address')
         name = str(first_name) + " " + str(last_name)
         # print(first_name, last_name)
+
         new_user = {
             "Name": name,
             "Username": username,
@@ -51,7 +52,24 @@ def add_user():
 @app.route('/check-username', methods=['POST'])
 def check_username():
     username = request.json.get('username')
-    existing_user = collection_Users.find_one({'Username': username})
+    existing_user = collection_Users.aggregate(
+        [
+            {
+                '$match': {
+                    'Username': username
+                }
+            },
+            {
+                '$limit': 1
+            },
+            {
+                '$project': {
+                    '_id': 0,
+                    'Username': 1
+                }
+            }
+        ]
+    )
     return jsonify({'available': existing_user is None})
 
 
@@ -102,19 +120,87 @@ def mainPage():
 @app.route('/product_list', methods=['GET'])
 def product_list():
     if request.method == 'GET':
-        products = list(collection_Products.find())
-        # jaye aggregate ..
-        print(session['username'])
-    return render_template("productList.html",products=products)
+        products = list(collection_Products.aggregate(
+            [
+                {
+                    "$skip": 0
+                },
+                {
+                    "$limit": 20
+                },
+                {
+                    "$lookup": {
+                        "from": "Users",
+                        "localField": "Seller.s_username",
+                        "foreignField": "Username",
+                        "as": "sellerInfo"
+                    }
+                },
+                {
+                    "$unwind": "$sellerInfo"
+                },
+                {
+                    "$project": {
+                        "Name": 1,
+                        "Categorie": 1,
+                        "Quantity": 1,
+                        "Price": 1,
+                        "Product_ID": 1,
+                        "Store_address": "$sellerInfo.Store_address",
+                        "averageRate": {
+                            "$avg": "$Points_and_Comments.rate"
+                        }
+                    }
+                }
+            ]
+        ))
+
+    return render_template("productList.html", products=products)
 
 @app.route('/product_page', methods=['POST'])
 def product_page():
     if request.method == 'POST':
-        print(session['username'])
         id = int(request.form.get('product_id'))
-        product_info = collection_Products.find_one({'Product_ID': id})
-        print(product_info)
-        return render_template("productPage.html", product=product_info)
+        product_info = list(collection_Products.aggregate(
+            [
+                {
+                    "$match": {
+                        "Product_ID": id
+                    }
+                },
+                {
+                    "$lookup": {
+                        "from": "Users",
+                        "localField": "Seller.s_username",
+                        "foreignField": "Username",
+                        "as": "sellerInfo"
+                    }
+                },
+                {
+                    "$unwind": "$sellerInfo"
+                },
+                {
+                    "$project": {
+                        "Product_ID": 1,
+                        "Name": 1,
+                        "Categorie": 1,
+                        "Color": 1,
+                        "Weight": 1,
+                        "Quantity": 1,
+                        "Price": 1,
+                        "Additional_description": 1,
+                        "Seller.s_name": 1,
+                        "Points_and_Comments": 1,
+                        "store_address": "$sellerInfo.Store_address"
+                    }
+                },
+                {
+                    "$limit": 1
+                }
+            ]
+        ))
+        # print(product_info)
+        return render_template("productPage.html", product=product_info[0])
 
 
 @app.route('/add_product', methods=['GET', 'POST'])
@@ -281,11 +367,21 @@ def user_panel():
         user_info = list(db.Users.aggregate([
             {
                 '$match': {
-                    'Username': session['username'],
+                    'Username': session['username']
+                }
+            },
+            {
+                '$project': {
+                    '_id': 0,
+                    'Username': 1,
+                    'Password': 1,
+                    'Name': 1,
+                    'Email': 1,
+                    'Phone_number': 1,
+                    'Store_address': 1
                 }
             }
         ]))
-        # jaye aggregate ..
         return render_template("userPanel.html",user_info=user_info)
     else:
         data = request.get_json()
@@ -313,10 +409,25 @@ def user_panel():
 def users_SaleList():
     username = session['username']
     user_products_for_sale = list(db.Users.aggregate([
-        {'$match': {'Username': username}},
-        {'$unwind': '$Products_for_sale'},
-        {'$project': {'_id': 0, 'Products_for_sale': 1}},
-        {'$limit': 10}
+        {
+            '$match': {
+                'Username': username
+            }
+        },
+        {
+            '$unwind': '$Products_for_sale'
+        },
+        {
+            '$project': {
+                '_id': 0, 'Products_for_sale': 1
+            }
+        },
+        {
+            '$skip': 0
+        },
+        {
+            '$limit': 10
+        }
     ]))
     return render_template("users_saleList.html", sales_list=user_products_for_sale , user = session['username'])
 
@@ -381,8 +492,16 @@ def delete_product():
         return jsonify({"success": False, "message": "Product ID is missing."})
     try:
         collection_Users.update_one(
-            {'Username': session['username']},
-            {'$pull': {'Products_for_sale': {'Product_ID': int(product_id)}}}
+            {
+                'Username': session['username']
+            },
+            {
+                '$pull': {
+                    'Products_for_sale': {
+                        'Product_ID': int(product_id)
+                    }
+                }
+            }
         )
         collection_Products.delete_one({'Product_ID': int(product_id)})
         return jsonify({"success": True})
@@ -398,9 +517,23 @@ def show_RatePage():
         session['product_id'] = product_id
         print("this is product Id")
         print(product_id)
-        product_info = collection_Products.find_one({"Product_ID": product_id})
-        #jaye aggregate
-        return render_template('rate_ProductPage.html', product=product_info)
+        product_info = list(collection_Products.aggregate(
+            [
+                {
+                    "$match": {
+                        "Product_ID": product_id
+                    }
+                },
+                {
+                    "$project": {
+                        "_id": 0,
+                        "Name": 1,
+                        "Product_ID": 1
+                    }
+                }
+            ]
+        ))
+        return render_template('rate_ProductPage.html', product=product_info[0])
 
 
 @app.route('/rate_ProductPage', methods=['GET', 'POST'])
@@ -413,18 +546,41 @@ def rate_ProductPage():
         username = session['username']
 
         user_info = list(collection_Users.aggregate([
-            {"$match": {"Username": username}},
-            {"$project": {"_id": 0, "Name": 1}}
+            {
+                "$match": {"Username": username}
+            },
+            {
+                "$project": {
+                    "_id": 0,
+                    "Name": 1
+                }
+            }
         ]))
         name = user_info[0]['Name']
 
         # Check if user has already commented and rated for this product or not
         product_info = list(collection_Products.aggregate([
-            {"$match": {"Product_ID": product_id}},
-            {"$unwind": "$Points_and_Comments"},
-            {"$match": {"Points_and_Comments.username": username}},
-            {"$limit": 1},
-            {"$project": {"_id": 1}}
+            {
+                "$match": {
+                    "Product_ID": product_id
+                }
+            },
+            {
+                "$unwind": "$Points_and_Comments"
+            },
+            {
+                "$match": {
+                    "Points_and_Comments.username": username
+                }
+            },
+            {
+                "$limit": 1
+            },
+            {
+                "$project": {
+                    "_id": 1
+                }
+            }
         ]))
         if product_info:
             return jsonify({'error': 'User already commented and rated for this product'})
@@ -432,13 +588,14 @@ def rate_ProductPage():
             collection_Products.update_one(
                 {"Product_ID": product_id},
                 {
-                    "$push": {"Points_and_Comments": {
-                                'username': username,
-                                'name': name,
-                                'comment': comment,
-                                'rate': rate
-                                }
-                             }
+                    "$push": {
+                        "Points_and_Comments": {
+                        'username': username,
+                        'name': name,
+                        'comment': comment,
+                        'rate': rate
+                        }
+                    }
                 })
             collection_Reviews.insert_one(
                 {

@@ -1,7 +1,12 @@
+@font-face {
+  font-family: IRANYekanFN;
+  src: url(../Qs_Iranyekan.ttf);
+}
 *{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: IRANYekanFN;
 }
 body{
   position: relative;
@@ -13,10 +18,11 @@ body{
   left: 0;
   top: 0;
   width: fit-content;
-  padding: 20px;
+  padding: 30px;
   height: 100%;
   background-color: black;
   border-radius: 0 0 10px 0;
+  font-family: IRANYekanFN;
 }
 #user_container div{
   width: 100%;
@@ -59,7 +65,7 @@ body{
   background-color: #da2828 !important;
 }
 .square p {
-  margin: 10px;
+  margin: 5px;
   color: white;
   text-decoration: none;
 }

@@ -1,5 +1,10 @@
 *{
     box-sizing: border-box;
+    font-family: IRANYekanFN;
+}
+@font-face {
+  font-family: IRANYekanFN;
+  src: url(../Qs_Iranyekan.ttf);
 }
 body {
     font-family: 'Arial', sans-serif;
@@ -15,12 +20,18 @@ body {
 
 h1 {
     color: #333;
-    margin: 60px 100px 60px 0;
-    text-align: left;
+    margin: 60px 0;
+    text-align: center;
 }
 
 .product-details {
     width: 70%;
+    background-color: white;
+    padding: 30px;
+    height: fit-content;
+    margin-bottom: 100px;
+    border: 2px solid #46fd1d;
+    border-radius: 15px;
 }
 
 .product-detail-row {
@@ -45,8 +56,13 @@ h1 {
 .detail-value li{
     margin-bottom: 10px;
     padding: 5px;
-    background-color: #5b5252;
+    background-color: #c73434;
+    border: 1px solid #c73434;
+    border-radius: 15px;
+    text-align: left;
+    padding: 10px;
     color: white;
+    font-family: IRANYekanFN;
 }
 .button_container{
     width: 100%;
@@ -54,17 +70,21 @@ h1 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 .button_container .purchase_button{
     padding: 10px;
-    background-color: yellow;
+    background-color: #8bec50;
     border-radius: 10px;
     cursor: pointer;
-    transition: 0.5s all;
+    transition: 1s all;
+    margin-top: 10px;
+    border: 1px solid #2b2d2a;
 }
 .button_container .purchase_button:hover{
-    background-color: #8bec50;
+    color: white;
+    background-color: #c73434;
+    border: 1px solid #c73434;
 }
 
 .quantity_container {
