@@ -1,3 +1,6 @@
+
+#Created by Erfan Afshar
+
 from __future__ import print_function
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify , session
@@ -12,7 +15,7 @@ password = quote_plus('dbImp!14@2')
 url = 'mongodb://%s:%s@172.18.17.236:27017/' % (fname, password) #172.18.17.236 #78.38.35.219
 client = MongoClient(url)
 
-
+# i created index for username and product_id in mongodb database
 db = client['400463108']
 collection_Users = db['Users']
 collection_Products = db['Products_forSale']
