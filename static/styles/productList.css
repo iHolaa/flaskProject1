@@ -13,7 +13,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     font-family: IRANYekanFN;
 }
 h1 {
@@ -52,7 +51,11 @@ button {
     font-family: IRANYekanFN;
     transition: 0.5s all;
 }
-
 button:hover {
     background-color: #8c1010;
+}
+
+.back_button{
+    margin-top: 50px;
+    margin-bottom: 20px;
 }

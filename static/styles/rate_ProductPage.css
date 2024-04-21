@@ -9,8 +9,8 @@
 }
 
 .content {
-  height: 100vh;
-  margin : 0 0;
+  height: fit-content;
+  margin : 100px 0;
   display: flex;
   justify-content: center;
   align-items: center;
